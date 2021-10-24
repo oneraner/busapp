@@ -1,4 +1,6 @@
+import router from "next/router";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { connect } from "react-redux";
 import KeyBoard from "../component/KeyBoard";
 
@@ -10,7 +12,6 @@ const Plan = props => {
   const [routeKeyBoard, setRouteKeyBoard] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const displayStopList = JSON.stringify(busRouteData);
-  console.log("allBusListData", allBusListData);
   useEffect(() => {
     props.getAllBusList();
   }, []);
@@ -36,7 +37,7 @@ const Plan = props => {
   const isSearchResult = allBusListData.length > 0 && searchValue;
 
   return (
-    <div className="relative">
+    <div className="min-h-screen relative">
       <div>
         目前搜尋:
         <input
@@ -54,21 +55,23 @@ const Plan = props => {
           allBusListData
             .filter(item => item.routeName.includes(searchValue))
             .map(item => (
-              <div
-                key={item.routeName}
-                className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2"
-              >
-                <span className="w-1/4">{item.routeName}</span>
-                <span className="w-3/4 flex justify-around">
-                  <span className="w-5/12 inline-flex justify-center">
-                    {item.departureStop}
+              <Link href={`/route/${encodeURIComponent(item.routeName)}`}>
+                <div
+                  key={item.routeName}
+                  className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2"
+                >
+                  <span className="w-1/4">{item.routeName}</span>
+                  <span className="w-3/4 flex justify-around">
+                    <span className="w-5/12 inline-flex justify-center">
+                      {item.departureStop}
+                    </span>
+                    <span className="w-2/12 inline-flex justify-center">-</span>
+                    <span className="w-5/12 inline-flex justify-center">
+                      {item.destinationStop}
+                    </span>
                   </span>
-                  <span className="w-2/12 inline-flex justify-center">-</span>
-                  <span className="w-5/12 inline-flex justify-center">
-                    {item.destinationStop}
-                  </span>
-                </span>
-              </div>
+                </div>
+              </Link>
             ))}
       </div>
       {routeKeyBoard && (

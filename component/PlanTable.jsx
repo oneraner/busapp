@@ -14,18 +14,14 @@ export const PlanTable = props => {
     if (currentSaveStop.length > 0) {
       currentSaveStop.map(data =>
         props.getEstimateTime({
-          route: data.routeName,
+          route: data.routerName,
           stationID: data.stationID,
         })
       );
     }
   }, [currentSaveStop]);
-
   console.log("plan", plan);
-
-  return (
-    <div onClick={() => props.getEstimateTime({ route, stationID })}>plan</div>
-  );
+  return <div>plan</div>;
 };
 
 const mapStateToProps = state => {

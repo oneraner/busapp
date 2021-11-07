@@ -2,7 +2,8 @@ import crypto from "crypto";
 import axios from "axios";
 
 export const busRoute = async (req, res) => {
-  const busNumber = req.query.route;
+  const { route, city } = req.query;
+  const routeString = encodeURIComponent(route);
   const baseUrl = `https://ptx.transportdata.tw/MOTC/`;
   const getAuthorizationHeader = () => {
     const AppID = process.env.APP_ID;
@@ -19,7 +20,7 @@ export const busRoute = async (req, res) => {
   const getData = () =>
     axios
       .get(
-        `${baseUrl}v2/Bus/DisplayStopOfRoute/City/Taipei/${busNumber}?$top=30&$format=JSON`,
+        `${baseUrl}v2/Bus/DisplayStopOfRoute/City/${city}/${routeString}?$top=30&$format=JSON`,
         {
           headers: getAuthorizationHeader(),
         }

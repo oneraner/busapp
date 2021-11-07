@@ -26,6 +26,7 @@ const Plan = props => {
     if (allBusList.length > 0) {
       const tempArray = [...allBusList];
       const routeList = tempArray.map(item => ({
+        city: item.City,
         routeName: item.RouteName.Zh_tw,
         departureStop: item.DepartureStopNameZh,
         destinationStop: item.DestinationStopNameZh,
@@ -56,7 +57,9 @@ const Plan = props => {
             .filter(item => item.routeName.includes(searchValue))
             .map(item => (
               <Link
-                href={`/route/${encodeURIComponent(item.routeName)}`}
+                href={`/route/${encodeURIComponent(item.routeName)}?city=${
+                  item.city
+                }`}
                 key={item.routeName}
               >
                 <div className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2">

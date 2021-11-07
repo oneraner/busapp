@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 const Route = props => {
   const router = useRouter();
-  const { routerName } = router.query;
+  const { routerName, city } = router.query;
   const { busRouteData } = props;
   const [roundTrip, setRoundTrip] = useState(true);
   const deaprtureData = busRouteData?.data?.data.find(
@@ -24,7 +24,7 @@ const Route = props => {
 
   useEffect(() => {
     if (!!routerName) {
-      props.getData(routerName);
+      props.getData({ routerName, city });
     }
   }, [routerName]);
 
@@ -138,8 +138,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  getData: route => {
-    dispatch({ type: "FETCH_BUS_ROUTE_DATA", route });
+  getData: routeData => {
+    dispatch({ type: "FETCH_BUS_ROUTE_DATA", routeData });
   },
 });
 

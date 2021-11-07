@@ -33,9 +33,10 @@ const reducer = (state = initState, action) => {
         busStopData: action.payload.data,
       };
     case FETCH_EstimateTime:
+      const tempArray = [...state.plan, action.payload.data];
       return {
         ...state,
-        plan: { ...plan, data: action.payload },
+        plan: tempArray,
       };
     default:
       return { ...state };

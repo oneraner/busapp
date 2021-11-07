@@ -55,11 +55,11 @@ const Plan = props => {
           allBusListData
             .filter(item => item.routeName.includes(searchValue))
             .map(item => (
-              <Link href={`/route/${encodeURIComponent(item.routeName)}`}>
-                <div
-                  key={item.routeName}
-                  className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2"
-                >
+              <Link
+                href={`/route/${encodeURIComponent(item.routeName)}`}
+                key={item.routeName}
+              >
+                <div className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2">
                   <span className="w-1/4">{item.routeName}</span>
                   <span className="w-3/4 flex justify-around">
                     <span className="w-5/12 inline-flex justify-center">

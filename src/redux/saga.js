@@ -12,11 +12,6 @@ function* fetchBusRouteData() {
 }
 
 function* fetchAllBusRouteList() {
-  // const data = yield call(() =>
-  //   axios
-  //     .get(`http://localhost:3000/api/allRouteTaipei`)
-  //     .then(response => response)
-  // );
   const [taipeiData, newTaipeiData] = yield all([
     call(() =>
       axios
@@ -35,9 +30,25 @@ function* fetchAllBusRouteList() {
   });
 }
 
+function* fetchFetchEstimeTimeData() {
+  const { routeData } = yield take("FETCH_EstimateTime_DATA");
+  const data = yield call(() =>
+    axios
+      .get(
+        `http://localhost:3000/api/estimatedTimeOfArrival?stationID=${routeData.stationID}`
+      )
+      .then(response => response)
+  );
+  const handleData = data.data.data.find(stopData => {
+    return stopData.RouteName.Zh_tw === routeData.route.toString();
+  });
+  yield put({ type: "FETCH_EstimateTime", payload: handleData });
+}
+
 function* mySaga() {
   yield takeEvery("FETCH_BUS_ROUTE_DATA", fetchBusRouteData);
   yield takeEvery("FETCH_ALL_BUS_ROUTE_LIST", fetchAllBusRouteList);
+  yield takeEvery("FETCH_EstimateTime_DATA", fetchFetchEstimeTimeData);
 }
 
 export default mySaga;

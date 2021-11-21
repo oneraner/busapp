@@ -1,5 +1,3 @@
-import plan from "../../pages/plan";
-
 export const FETCH_ALL_BUS_LIST = "FETCH_ALL_BUS_LIST";
 export const FETCH_BUS_ROUTE = "FETCH_BUS_ROUTE";
 export const FETCH_BUS_STOP = "FETCH_BUS_STOP";
@@ -33,7 +31,15 @@ const reducer = (state = initState, action) => {
         busStopData: action.payload.data,
       };
     case FETCH_EstimateTime:
-      const tempArray = [...state.plan, action.payload.data];
+      const isReplyData = state.plan.find(data => {
+        const isRouteReply =
+          data.RouteName.Zh_tw === action.payload.data.RouteName.Zh_tw;
+        const isStopReply = data.StopUID === action.payload.data.StopUID;
+        return isRouteReply && isStopReply;
+      });
+      const tempArray = isReplyData
+        ? [...state.plan]
+        : [...state.plan, action.payload.data];
       return {
         ...state,
         plan: tempArray,

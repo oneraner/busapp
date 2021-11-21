@@ -3,16 +3,26 @@ import { call, put, takeEvery, take, all } from "redux-saga/effects";
 
 function* fetchBusRouteData() {
   const { routeData } = yield take("FETCH_BUS_ROUTE_DATA");
-  const data = yield call(() =>
-    axios
-      .get(
-        `http://localhost:3000/api/bus?route=${encodeURI(
-          routeData.routerName
-        )}&city=${encodeURI(routeData.city)}`
-      )
-      .then(response => response)
-  );
-  yield put({ type: "FETCH_BUS_ROUTE", payload: { data } });
+  try {
+    const data = yield call(() =>
+      axios
+        .get(
+          `http://localhost:3000/api/bus?route=${encodeURI(
+            routeData.routerName
+          )}&city=${encodeURI(routeData.city)}`
+        )
+        .then(response => response)
+    );
+    const uniRouteData = data?.data?.data.filter(
+      data => data.RouteUID === routeData.routeUid
+    );
+    yield put({
+      type: "FETCH_BUS_ROUTE",
+      payload: { data: uniRouteData },
+    });
+  } catch (error) {
+    console.log("error", error);
+  }
 }
 
 function* fetchAllBusRouteList() {
@@ -46,7 +56,6 @@ function* fetchFetchEstimeTimeData() {
   const handleData = data.data.data.find(stopData => {
     return stopData.RouteName.Zh_tw === routeData.route;
   });
-
   yield put({ type: "FETCH_EstimateTime", payload: { data: handleData } });
 }
 

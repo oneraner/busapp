@@ -1,24 +1,25 @@
-import router from "next/router";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import KeyBoard from "../component/KeyBoard";
 
 const Plan = props => {
-  const { allBusList, busRouteData } = props;
   const [allBusListData, setAllbusListData] = useState([]);
   const [busRoute, setBusRoute] = useState("");
-  const [busStop, setBusStop] = useState("");
+  // const [busStop, setBusStop] = useState("");
   const [routeKeyBoard, setRouteKeyBoard] = useState(false);
   const [searchValue, setSearchValue] = useState("");
-  const displayStopList = JSON.stringify(busRouteData);
+
+  const allBusList = useSelector(state => state.allBusList);
+  const dispatch = useDispatch();
+  // const displayStopList = JSON.stringify(busRouteData);
   useEffect(() => {
-    props.getAllBusList();
+    dispatch({ type: "FETCH_ALL_BUS_ROUTE_LIST" });
   }, []);
 
   useEffect(() => {
     if (!!busRoute) {
-      props.getData(busRoute);
+      dispatch({ type: "FETCH_BUS_ROUTE_DATA", route: busRoute });
     }
   }, [busRoute]);
 
@@ -26,6 +27,7 @@ const Plan = props => {
     if (allBusList.length > 0) {
       const tempArray = [...allBusList];
       const routeList = tempArray.map(item => ({
+        routeUid: item.RouteUID,
         city: item.City,
         routeName: item.RouteName.Zh_tw,
         departureStop: item.DepartureStopNameZh,
@@ -57,9 +59,10 @@ const Plan = props => {
             .filter(item => item.routeName.includes(searchValue))
             .map(item => (
               <Link
-                href={`/route/${encodeURIComponent(item.routeName)}?city=${
-                  item.city
-                }`}
+                href={`/route/${encodeURIComponent(item.routeName)}?routeUid=${
+                  item.routeUid
+                }&city=${item.city}`}
+                passHref
                 key={item.routeName}
               >
                 <div className="w-full flex items-center border border-blue-900 rounded-lg p-4 mb-2">
@@ -84,20 +87,4 @@ const Plan = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    allBusList: state.allBusList,
-    busRouteData: state.busRouteData,
-  };
-};
-
-const mapDispatchToProps = dispatch => ({
-  getData: route => {
-    dispatch({ type: "FETCH_BUS_ROUTE_DATA", route });
-  },
-  getAllBusList: () => {
-    dispatch({ type: "FETCH_ALL_BUS_ROUTE_LIST" });
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Plan);
+export default Plan;

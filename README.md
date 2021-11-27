@@ -1,34 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+2021 the frontend no.3
 
-## Getting Started
+可查詢雙北公車路線與追蹤站牌
 
-First, run the development server:
+主要功能：
+1.首頁可顯示目前追蹤的路線與站牌，並顯示到站時間(目前暫訂三筆)
+2.可刪除與新增目前追蹤的路線站牌
+3.可以路線名稱搜尋雙北公車列表，點選後分為去返程呈現所有站序
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+作者的話：其實這個功能並不符合評分的使用者情境，作者的初衷只是想要上班的時候一眼可以看完常搭的公車時間，並且偶爾會有一些想搭的公車站牌有點差距的情況，在一般的 App 中，必須要分別搜尋或加入兩條路線，再分別點選查看該路線的到站時間，如從木新路保儀路口到公館，可由忠順廟搭251，或走比較遠到國泰新村(興隆)搭253、671，或在台北車站到信義光復路口，台北車站有 N (N > 3)種，這時候就要追蹤台北車站(忠孝)的22，跟台北車站(青島)的 88，這個 side project 就是為了解決這種情況。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ 使用技術：Next.js、Redux Saga、Tailwind CSS
+ UI參照：<a href="https://2021.thef2e.com/users/6296427084285739998">Raccoon</a>
+ 作者： Jeff Chao Email: oneraner@gmail.com

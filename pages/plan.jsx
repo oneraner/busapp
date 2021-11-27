@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
-import KeyBoard from "../component/KeyBoard";
+import KeyBoard from "../components/KeyBoard";
 
 import search from "../public/image/search.svg";
 import civet_cat from "../public/image/civet_cat.png";

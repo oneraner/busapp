@@ -1,6 +1,6 @@
 import * as React from "react";
 import Head from "next/head";
-import PlanTable from "../component/PlanTable";
+import PlanTable from "../components/PlanTable";
 
 const Home = () => {
   return (

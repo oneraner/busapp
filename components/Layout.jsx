@@ -12,12 +12,12 @@ const Layout = ({ children }) => {
       <header className="max-w-screen-md w-full">
         <ul className="flex justify-evenly items-center w-full bg-c-primary">
           <li onClick={() => router.push("/")}>
-            <Image src={logo} />
+            <Image src={logo} alt="logo" />
           </li>
           <li className="text-c-white" onClick={() => router.push("/plan")}>
-            <Image src={star} />
+            <Image src={star} alt="編輯" />
             編輯計畫
-            <Image src={star} />
+            <Image src={star} alt="編輯" />
           </li>
         </ul>
       </header>
@@ -27,7 +27,7 @@ const Layout = ({ children }) => {
           <li className="w-full text-c-white flex justify-center items-center ">
             本站資料由
             <span className="w-48">
-              <Image src={ptx} />
+              <Image src={ptx} alt="交通部運輸平台" />
             </span>
             提供
           </li>

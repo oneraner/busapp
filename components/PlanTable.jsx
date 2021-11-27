@@ -20,7 +20,7 @@ export const PlanTable = () => {
     if (currentSaveStop.length > 0) {
       refreshData(currentSaveStop);
     }
-  }, [currentSaveStop]);
+  }, [currentSaveStop, refreshData]);
 
   useEffect(() => {
     if (plan.length > 0) {
@@ -35,7 +35,7 @@ export const PlanTable = () => {
 
       return () => clearInterval(timeId);
     }
-  }, [plan, time, currentSaveStop]);
+  }, [plan, time, currentSaveStop, refreshData, refreshTime]);
 
   const refreshData = list => {
     list.map(data =>

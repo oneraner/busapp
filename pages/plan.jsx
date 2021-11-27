@@ -69,7 +69,7 @@ const Plan = () => {
             onChange={e => setSearchValue(e.target.value)}
           ></input>
           <div className="absolute top-2 left-2">
-            <Image src={search} />
+            <Image src={search} alt="搜尋公車路線" />
           </div>
         </div>
         <div className="mb-2">
@@ -88,7 +88,7 @@ const Plan = () => {
                 <p className="mb-1">想去哪裡呢？</p>
                 <p>試著搜尋路線吧</p>
               </h2>
-              <Image src={civet_cat} />
+              <Image src={civet_cat} alt="可愛的狸貓" />
             </div>
           )}
           {isSearchResult &&

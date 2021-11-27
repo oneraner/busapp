@@ -31,19 +31,25 @@ const reducer = (state = initState, action) => {
         busStopData: action.payload.data,
       };
     case FETCH_EstimateTime:
-      const isReplyData = state.plan.find(data => {
+      const isReplyData = state.plan.findIndex(data => {
         const isRouteReply =
           data.RouteName.Zh_tw === action.payload.data.RouteName.Zh_tw;
         const isStopReply = data.StopUID === action.payload.data.StopUID;
         return isRouteReply && isStopReply;
       });
-      const tempArray = isReplyData
-        ? [...state.plan]
-        : [...state.plan, action.payload.data];
+      let tempArray = [...state.plan];
+      if (isReplyData === -1) {
+        tempArray.push(action.payload.data);
+      } else {
+        tempArray.splice(isReplyData, 1, action.payload.data);
+      }
+
+      console.log("tempArray", isReplyData, tempArray);
       return {
         ...state,
         plan: tempArray,
       };
+
     default:
       return { ...state };
   }

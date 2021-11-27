@@ -1,6 +1,8 @@
 import * as React from "react";
 import Image from "next/image";
-import logo from "../public/image/PTX_logo_light.png";
+import ptx from "../public/image/PTX_logo_dark.png";
+import logo from "../public/image/logo.png";
+import star from "../public/image/Star_white.svg";
 import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
@@ -11,25 +13,25 @@ const Layout = ({ children }) => {
   };
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <header className="max-w-screen-md w-full pb-16">
-        <ul className="flex justify-evenly items-center w-full">
-          <li onClick={() => router.push("/")}>logo</li>
-          <li onClick={handleClick}>my plan</li>
-          <li>login</li>
+      <header className="max-w-screen-md w-full">
+        <ul className="flex justify-evenly items-center w-full bg-c-primary">
+          <li onClick={() => router.push("/")}>
+            <Image src={logo} />
+          </li>
+          <li className="text-c-white" onClick={() => router.push("/plan")}>
+            <Image src={star} />
+            編輯計畫
+            <Image src={star} />
+          </li>
         </ul>
       </header>
-      <main className="max-w-screen-md w-full">{children}</main>
-      <footer className="max-w-screen-md w-full flex flex-col pt-7">
-        <ul className="flex justify-evenly items-center mb-1">
-          <li onClick={() => router.push("/")}>logo</li>
-          <li onClick={handleClick}>my plan</li>
-          <li>login</li>
-        </ul>
+      <main className="max-w-screen-md w-full bg-c-bg">{children}</main>
+      <footer className="max-w-screen-md w-full flex flex-col pt-3 pb-3 bg-c-primary">
         <ul>
-          <li className="w-full flex justify-center items-center">
+          <li className="w-full text-c-white flex justify-center items-center ">
             本站資料由
             <span className="w-48">
-              <Image src={logo} />
+              <Image src={ptx} />
             </span>
             提供
           </li>

@@ -17,11 +17,11 @@ const addSearchText = (text, value, onChange) => {
 
 const KeyBoard = ({ value = "", handleChange = () => {} }) => {
   return (
-    <div className="w-full fixed bottom-0 z-10 bg-purple-200 border-t border-b border-gray-500 pt-2 pb-1">
+    <div className="w-full fixed bottom-0 z-10 bg-c-white border-t border-b border-gray-500 pt-2 pb-1">
       <div className="flex justify-evenly w-full mb-1">
         {first.map(text => (
           <button
-            className="w-2/12 text-base py-2 border border-gray-500 rounded-lg"
+            className="w-2/12 bg-c-primary text-c-white text-base py-2 border border-gray-500 rounded-lg"
             key={text}
             onClick={() => addSearchText(text, value, handleChange)}
           >
@@ -32,7 +32,7 @@ const KeyBoard = ({ value = "", handleChange = () => {} }) => {
       <div className="flex justify-evenly w-full mb-1">
         {second.map(text => (
           <button
-            className="w-2/12 text-base py-2 border border-gray-500 rounded-lg"
+            className="w-2/12 bg-c-primary text-c-white text-base py-2 border border-gray-500 rounded-lg"
             key={text}
             onClick={() => addSearchText(text, value, handleChange)}
           >
@@ -43,7 +43,7 @@ const KeyBoard = ({ value = "", handleChange = () => {} }) => {
       <div className="flex justify-evenly w-full mb-1">
         {third.map(text => (
           <button
-            className="w-2/12 text-base py-2 border border-gray-500 rounded-lg"
+            className="w-2/12 bg-c-primary text-c-white text-base py-2 border border-gray-500 rounded-lg"
             key={text}
             onClick={() => addSearchText(text, value, handleChange)}
           >
@@ -54,7 +54,7 @@ const KeyBoard = ({ value = "", handleChange = () => {} }) => {
       <div className="flex justify-evenly w-full mb-1">
         {fourth.map(text => (
           <button
-            className="w-2/12 text-base py-2 border border-gray-500 rounded-lg"
+            className="w-2/12 bg-c-primary text-c-white text-base py-2 border border-gray-500 rounded-lg"
             key={text}
             onClick={() => addSearchText(text, value, handleChange)}
           >

@@ -2,7 +2,7 @@ import crypto from "crypto";
 import axios from "axios";
 
 export const estimatedTimeOfArrival = async (req, res) => {
-  const { stationID } = req.query;
+  const { stationID, city } = req.query;
   const baseUrl = `https://ptx.transportdata.tw/MOTC/`;
   const getAuthorizationHeader = () => {
     const AppID = process.env.APP_ID;
@@ -19,7 +19,7 @@ export const estimatedTimeOfArrival = async (req, res) => {
   const getData = () =>
     axios
       .get(
-        `${baseUrl}v2/Bus/EstimatedTimeOfArrival/City/Taipei/PassThrough/Station/${stationID}?$top=30&$format=JSON`,
+        `${baseUrl}v2/Bus/EstimatedTimeOfArrival/City/${city}/PassThrough/Station/${stationID}?$top=30&$format=JSON`,
         {
           headers: getAuthorizationHeader(),
         }

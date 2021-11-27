@@ -7,7 +7,7 @@ function* fetchBusRouteData() {
     const data = yield call(() =>
       axios
         .get(
-          `http://localhost:3000/api/bus?route=${encodeURI(
+          `${window.location.origin}/api/bus?route=${encodeURI(
             routeData.routerName
           )}&city=${encodeURI(routeData.city)}`
         )
@@ -29,12 +29,12 @@ function* fetchAllBusRouteList() {
   const [taipeiData, newTaipeiData] = yield all([
     call(() =>
       axios
-        .get(`http://localhost:3000/api/allRouteTaipei`)
+        .get(`${window.location.origin}/api/allRouteTaipei`)
         .then(response => response)
     ),
     call(() =>
       axios
-        .get(`http://localhost:3000/api/allRouteNewTaipei`)
+        .get(`${window.location.origin}/api/allRouteNewTaipei`)
         .then(response => response)
     ),
   ]);
@@ -49,13 +49,14 @@ function* fetchFetchEstimeTimeData() {
   const data = yield call(() =>
     axios
       .get(
-        `http://localhost:3000/api/estimatedTimeOfArrival?stationID=${routeData.stationID}`
+        `${window.location.origin}/api/estimatedTimeOfArrival?stationID=${routeData.stationID}&city=${routeData.city}`
       )
       .then(response => response)
   );
   const handleData = data.data.data.find(stopData => {
     return stopData.RouteName.Zh_tw === routeData.route;
   });
+  console.log("handleData ", handleData);
   yield put({ type: "FETCH_EstimateTime", payload: { data: handleData } });
 }
 

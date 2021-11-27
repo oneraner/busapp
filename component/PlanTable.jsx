@@ -1,36 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-// const stopData = async ({ routerName, stationID }) => {
-//   const data = await axios
-//     .get(
-//       `http://localhost:3000/api/estimatedTimeOfArrival?stationID=${stationID}`
-//     )
-//     .then(response => response);
-//   const handleData = data?.data?.data.find(stopData => {
-//     return stopData.RouteName.Zh_tw === routerName;
-//   });
-//   return handleData;
-// };
-
-// const serverSideFetch = async list => {
-//   const allList = await Promise.all(
-//     list.map(
-//       async item =>
-//         await stopData({
-//           routerName: item.routerName,
-//           stationID: item.stationID,
-//         })
-//     )
-//   );
-//   console.log("allList", allList);
-// };
-
-export const PlanTable = props => {
+export const PlanTable = () => {
   const [currentSaveStop, setCurrentSaveStop] = useState([]);
   const [time, setTime] = useState(0);
   const [refreshTime, setRefreshTime] = useState(60);
-  const plan = useSelector(state => state.plan);
+  const plan = useSelector(state => state.plan) ?? [];
   const dispatch = useDispatch();
   console.log("plan", plan);
 
@@ -68,16 +43,26 @@ export const PlanTable = props => {
         routeData: {
           route: data.routerName,
           stationID: data.stationID,
+          city: data.city,
         },
       })
     );
   };
 
-  const handleCountDown = EstimateTime => {
-    if (!EstimateTime) {
-      return "未營運";
+  const handleCountDown = ({ status, estimateTime }) => {
+    if (!estimateTime) {
+      switch (status) {
+        case 1:
+          return "尚未發車";
+        case 2:
+          return "交管不停靠";
+        case 3:
+          return "末班車已過";
+        default:
+          return "今日未營運";
+      }
     }
-    const secTime = Number(EstimateTime) - time;
+    const secTime = Number(estimateTime) - time;
     const minTime = Math.floor(secTime / 60);
     const secondsRemaining = Math.floor(secTime % 60);
     if (secTime < 0) {
@@ -87,15 +72,32 @@ export const PlanTable = props => {
     return `${minTime} 分 ${secondsRemaining} 秒`;
   };
 
+  const deletePlan = index => {
+    const tempArray = [...currentSaveStop];
+    tempArray.splice(index, 1);
+    setCurrentSaveStop(tempArray);
+    localStorage.setItem("station", JSON.stringify(tempArray));
+  };
+
   return (
-    <div className="min-h-screen relative">
-      <div>目前追蹤的路線</div>
-      {plan.map(data => (
-        <React.Fragment key={data.StopID}>
-          <div>{data.RouteName.Zh_tw}</div>
-          <div>{data.StopName.Zh_tw}</div>
-          <div>{handleCountDown(data.EstimateTime)}</div>
-        </React.Fragment>
+    <div className="min-h-c-screen relative">
+      <div className="mb-2">目前追蹤的路線</div>
+      {plan.map((data, index) => (
+        <ul className="mb-2" key={data.StopID}>
+          <li className="flex justify-between">
+            <p>{data.RouteName.Zh_tw}</p>
+            <p onClick={() => deletePlan(index)}>刪除</p>
+          </li>
+          <li className="flex justify-between">
+            <p>{data.StopName.Zh_tw}</p>
+            <p>
+              {handleCountDown({
+                status: data.StopStatus,
+                estimateTime: data.EstimateTime,
+              })}
+            </p>
+          </li>
+        </ul>
       ))}
     </div>
   );

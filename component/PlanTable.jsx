@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 export const PlanTable = () => {
+  const router = useRouter();
   const [currentSaveStop, setCurrentSaveStop] = useState([]);
   const [time, setTime] = useState(0);
   const [refreshTime, setRefreshTime] = useState(60);
   const plan = useSelector(state => state.plan) ?? [];
   const dispatch = useDispatch();
-  console.log("plan", plan);
 
   useEffect(() => {
     if (!!localStorage.getItem("station")) {
       setCurrentSaveStop(JSON.parse(localStorage.getItem("station")));
     }
-  }, []);
+  }, [router.pathname]);
 
   useEffect(() => {
     if (currentSaveStop.length > 0) {
@@ -75,27 +76,32 @@ export const PlanTable = () => {
   const deletePlan = index => {
     const tempArray = [...currentSaveStop];
     tempArray.splice(index, 1);
-    setCurrentSaveStop(tempArray);
     localStorage.setItem("station", JSON.stringify(tempArray));
+    setCurrentSaveStop(tempArray);
   };
 
   return (
     <div className="min-h-c-screen relative">
-      <div className="mb-2">目前追蹤的路線</div>
+      <div className=" text-c-primary font-semibold p-2 mb-2">
+        目前追蹤的路線
+      </div>
       {plan.map((data, index) => (
-        <ul className="mb-2" key={data.StopID}>
+        <ul
+          className=" bg-c-white rounded-lg px-4 py-2 mx-3 mb-2"
+          key={data.StopID}
+        >
           <li className="flex justify-between">
             <p>{data.RouteName.Zh_tw}</p>
-            <p onClick={() => deletePlan(index)}>刪除</p>
-          </li>
-          <li className="flex justify-between">
-            <p>{data.StopName.Zh_tw}</p>
             <p>
               {handleCountDown({
                 status: data.StopStatus,
                 estimateTime: data.EstimateTime,
               })}
             </p>
+            {/* <p onClick={() => deletePlan(index)}>刪除</p> */}
+          </li>
+          <li className="flex justify-between">
+            <p>{data.StopName.Zh_tw}</p>
           </li>
         </ul>
       ))}

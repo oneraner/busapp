@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div>
       <Head>
-        <title>米路通</title>
+        <title>迷路通</title>
         <meta name="description" content="顯示到站時間" />
         <link rel="icon" href="/star.ico" />
       </Head>

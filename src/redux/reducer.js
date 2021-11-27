@@ -44,7 +44,6 @@ const reducer = (state = initState, action) => {
         tempArray.splice(isReplyData, 1, action.payload.data);
       }
 
-      console.log("tempArray", isReplyData, tempArray);
       return {
         ...state,
         plan: tempArray,

@@ -78,24 +78,26 @@ const Route = () => {
   return (
     <>
       <Head>
-        <title>米路通</title>
+        <title>迷路通</title>
         <meta name="description" content="顯示公車站序" />
         <link rel="icon" href="/star.ico" />
       </Head>
       <div className="min-h-c-screen">
-        <div>{`目前選擇的路線：${routerName}`}</div>
+        <div className="text-c-primary font-semibold p-2 mb-2">{`目前選擇的路線：${routerName}`}</div>
         <ul className="flex justify-evenly items-center mb-2">
           <li
-            className="border rounded-lg px-3 py-2"
+            className=" flex items-center border rounded-lg px-3 py-2"
             onClick={() => setRoundTrip(true)}
           >
-            去程
+            {roundTrip ? <Image src={star_active} /> : <Image src={star} />}
+            <span className="ml-1">去程</span>
           </li>
           <li
-            className="border rounded-lg px-3 py-2"
+            className="flex items-center border rounded-lg px-3 py-2"
             onClick={() => setRoundTrip(false)}
           >
-            返程
+            {roundTrip ? <Image src={star} /> : <Image src={star_active} />}
+            <span className="ml-1">返程</span>
           </li>
         </ul>
         <ul className="px-2">
@@ -104,20 +106,20 @@ const Route = () => {
               const isCurrentSave = isConformStop(data.StationID);
               return (
                 <li
-                  className="flex justify-between items-center mb-2"
+                  className="flex justify-between items-center bg-c-white rounded-lg px-4 py-2 mb-2"
                   key={data.StopID}
                 >
                   {data.StopName.Zh_tw}
                   {isCurrentSave ? (
                     <a
-                      className="w-20 rounded-lg p-2"
+                      className="rounded-lg p-2"
                       onClick={() => deleteStationID(data.StationID)}
                     >
                       <Image src={star_active} />
                     </a>
                   ) : (
                     <a
-                      className=" w-20 rounded-lg p-2"
+                      className="rounded-lg p-2"
                       onClick={() => addStationID(data.StationID)}
                     >
                       <Image src={star} />
@@ -131,23 +133,23 @@ const Route = () => {
               const isCurrentSave = isConformStop(data.StationID);
               return (
                 <li
-                  className="flex justify-between items-center mb-2"
+                  className="flex justify-between items-center bg-c-white rounded-lg px-4 py-2 mb-2"
                   key={data.StopID}
                 >
                   {data.StopName.Zh_tw}
                   {isCurrentSave ? (
                     <a
-                      className="w-20 text-center border bg-red-700 text-white rounded-lg p-2"
+                      className="rounded-lg p-2"
                       onClick={() => deleteStationID(data.StationID)}
                     >
-                      已加入
+                      <Image src={star_active} />
                     </a>
                   ) : (
                     <a
-                      className=" w-20 text-center border rounded-lg p-2"
+                      className="rounded-lg p-2"
                       onClick={() => addStationID(data.StationID)}
                     >
-                      加入
+                      <Image src={star} />
                     </a>
                   )}
                 </li>

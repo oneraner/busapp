@@ -1,15 +1,11 @@
 const first = ["紅", "藍", "1", "2", "3"];
 const second = ["綠", "棕", "4", "5", "6"];
 const third = ["橘", "小", "7", "8", "9"];
-const fourth = ["更多", "幹線", "F", "0", "清除"];
+const fourth = ["內科", "幹線", "F", "0", "清除"];
 
 const addSearchText = (text, value, onChange) => {
   if (text === "清除") {
     onChange("");
-    return;
-  }
-  if (text === "更多") {
-    alert("還沒做");
     return;
   }
   onChange(`${value}${text}`);

@@ -56,7 +56,6 @@ function* fetchFetchEstimeTimeData() {
   const handleData = data.data.data.find(stopData => {
     return stopData.RouteName.Zh_tw === routeData.route;
   });
-  console.log("handleData ", handleData);
   yield put({ type: "FETCH_EstimateTime", payload: { data: handleData } });
 }
 

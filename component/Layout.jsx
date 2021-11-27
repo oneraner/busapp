@@ -7,10 +7,6 @@ import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
   const router = useRouter();
-  const handleClick = e => {
-    e.preventDefault();
-    router.push("/plan");
-  };
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <header className="max-w-screen-md w-full">

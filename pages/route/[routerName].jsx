@@ -31,7 +31,7 @@ const Route = () => {
     if (!!localStorage.getItem("station")) {
       setCurrentSaveStop(JSON.parse(localStorage.getItem("station")));
     }
-  }, [routeUid, routerName, city]);
+  }, [routeUid, routerName, city, dispatch]);
 
   useEffect(() => {
     if (!!routerName && !!routeUid) {
@@ -40,7 +40,7 @@ const Route = () => {
         routeData: { routeUid, routerName, city },
       });
     }
-  }, [routerName, routeUid, city]);
+  }, [routerName, routeUid, city, dispatch]);
 
   const isConformStop = stationID => {
     const isConform = currentSaveStop.find(data => {
@@ -89,14 +89,22 @@ const Route = () => {
             className=" flex items-center border rounded-lg px-3 py-2"
             onClick={() => setRoundTrip(true)}
           >
-            {roundTrip ? <Image src={star_active} /> : <Image src={star} />}
+            {roundTrip ? (
+              <Image src={star_active} alt="顯示去程" />
+            ) : (
+              <Image src={star} alt="顯示返程" />
+            )}
             <span className="ml-1">去程</span>
           </li>
           <li
             className="flex items-center border rounded-lg px-3 py-2"
             onClick={() => setRoundTrip(false)}
           >
-            {roundTrip ? <Image src={star} /> : <Image src={star_active} />}
+            {roundTrip ? (
+              <Image src={star} alt="顯示去程" />
+            ) : (
+              <Image src={star_active} alt="顯示返程" />
+            )}
             <span className="ml-1">返程</span>
           </li>
         </ul>
@@ -115,14 +123,14 @@ const Route = () => {
                       className="rounded-lg p-2"
                       onClick={() => deleteStationID(data.StationID)}
                     >
-                      <Image src={star_active} />
+                      <Image src={star_active} alt="已加入清單" />
                     </a>
                   ) : (
                     <a
                       className="rounded-lg p-2"
                       onClick={() => addStationID(data.StationID)}
                     >
-                      <Image src={star} />
+                      <Image src={star} alt="未加入清單" />
                     </a>
                   )}
                 </li>
@@ -142,14 +150,14 @@ const Route = () => {
                       className="rounded-lg p-2"
                       onClick={() => deleteStationID(data.StationID)}
                     >
-                      <Image src={star_active} />
+                      <Image src={star_active} alt="已加入清單" />
                     </a>
                   ) : (
                     <a
                       className="rounded-lg p-2"
                       onClick={() => addStationID(data.StationID)}
                     >
-                      <Image src={star} />
+                      <Image src={star} alt="未加入清單" />
                     </a>
                   )}
                 </li>

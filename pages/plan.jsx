@@ -21,13 +21,13 @@ const Plan = () => {
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL_BUS_ROUTE_LIST" });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!!busRoute) {
       dispatch({ type: "FETCH_BUS_ROUTE_DATA", route: busRoute });
     }
-  }, [busRoute]);
+  }, [busRoute, dispatch]);
 
   useEffect(() => {
     if (allBusList.length > 0) {
@@ -50,7 +50,7 @@ const Plan = () => {
         <meta name="description" content="搜尋公車路線" />
         <link rel="icon" href="/star.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
           rel="stylesheet"

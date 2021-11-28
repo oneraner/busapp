@@ -49,12 +49,6 @@ const Plan = () => {
         <title>迷路通</title>
         <meta name="description" content="搜尋公車路線" />
         <link rel="icon" href="/star.ico" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <div
         className={`${
@@ -81,7 +75,7 @@ const Plan = () => {
             {routeKeyBoard ? "關閉小鍵盤" : "開啟小鍵盤"}
           </button>
         </div>
-        <div className="relative">
+        <div className="relative flex flex-col justify-center items-center">
           {!isSearchResult && (
             <div className="relative pt-8">
               <h2 className="absolute top-8 right-16 text-sm text-c-blue">
@@ -102,7 +96,7 @@ const Plan = () => {
                   passHref
                   key={item.routeName}
                 >
-                  <div className="flex items-center font-roboto text-c-dark bg-c-white rounded-lg px-2 mx-2 py-4 mb-2">
+                  <div className=" w-11/12 flex items-center font-roboto text-c-dark bg-c-white rounded-lg px-2 mx-2 py-4 mb-2">
                     <span className="w-2/12">{item.routeName}</span>
                     <span className="w-10/12 flex justify-evenly">
                       <span className="w-5/12 inline-flex justify-center items-center">

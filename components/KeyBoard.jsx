@@ -13,7 +13,7 @@ const addSearchText = (text, value, onChange) => {
 
 const KeyBoard = ({ value = "", handleChange = () => {} }) => {
   return (
-    <div className="w-full fixed bottom-0 z-10 bg-c-white border-t border-b border-gray-500 pt-2 pb-1">
+    <div className="w-full max-w-screen-md fixed bottom-0 z-10 bg-c-white border-t border-b border-gray-500 pt-2 pb-1">
       <div className="flex justify-evenly w-full mb-1">
         {first.map(text => (
           <button
